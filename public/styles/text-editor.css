@@ -1,0 +1,205 @@
+/* MAKE FOOTER STICK TO BOTTOM */
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    width: 100vw;
+}
+
+.main__container {
+    padding-top: 4.5em;
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* ACCOUNT NAVIGATION */
+
+.account__navigation__wrapper {
+    display: flex;
+    align-items: center;
+    height: 4em;
+    font-family: 'Raleway', sans-serif;
+}
+.account__navigation__wrapper a {
+    text-decoration: none;
+    color: #393939;
+}
+.account__navigation__wrapper a:hover {
+    color: #FFA505;
+}
+.account__navigation__wrapper img {
+    height: 1em;
+    margin: 0 0.3em;
+}
+.account__navigation__wrapper p {
+    color: #393939;
+}
+
+/* EDITOR HEADER */
+
+.editor__header {
+    width: 100%;
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    align-items: center;
+    height: 3em;
+}
+.editor__article__title {
+    font-family: 'Raleway', sans-serif;
+    padding: .4em .8em;
+    font-size: 1.1em;
+    flex: 3;
+    max-width: 38em;
+    margin-right: 3em;
+    height: 100%;
+    border: 1px solid #bebebe;
+    outline: 0;
+}
+.editor__article__title:focus {
+    border: 1px solid #8d8d8d;
+}
+.editor__background__input {
+    flex: 1.5;
+    max-width: 25em;
+    margin-right: 1em;
+    margin-left: auto;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid #bebebe;
+    color: #666666;
+    cursor: pointer;
+}
+.editor__background__input p {
+    background-color: rgb(241, 241, 241);
+    padding: .2em .6em;
+    border-radius: .3em;
+    border: 1px solid rgb(197, 197, 197);
+}
+.editor__save__btn {
+    height: 100%;
+    background-color: #FFA505;
+    border: 0;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.35em;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    max-width: 9em;
+    margin-left: auto;
+}
+
+/* EDITOR */
+
+.editor__container {
+    border: 1px solid #bebebe;
+    margin-top: 3em;
+}
+.editor__controls__container {
+    border-bottom: 1px solid #bebebe;
+    background-color: rgb(245, 245, 245);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.editor__btn {
+    border-radius: .4em;
+    border: 0;
+    padding: .3em;
+    height: 2.1em;
+    width: 3em;
+    background-color: rgb(219, 219, 219);
+    cursor: pointer;
+    margin: .2em .15em;
+}
+.editor__btn:hover {
+    background-color: rgb(199, 199, 199);
+}
+.editor__btn:active {
+    border: 2px solid rgb(133, 133, 133);
+}
+select {
+    height: 2em;
+    font-size: .9em;
+    outline: 0;
+    margin: .2em .15em;
+    border: 0px solid #a3a3a3;
+    background-color: rgb(219, 219, 219);
+    padding: 0 .5em;
+    cursor: pointer;
+}
+select:hover {
+    background-color: rgb(199, 199, 199);
+}
+.editor__content {
+    padding: 2em;
+    outline: 0;
+}
+
+
+/* MEDIA SCREEN */
+
+@media screen and (max-width: 850px) {
+    .main__container {
+        padding-top: 4em;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main__container {
+        font-size: 13px;
+    }
+    .editor__btn, .editor__font, .editor__font__size {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .editor__header {
+        flex-direction: column;
+        height: fit-content;
+    }
+    .editor__article__title {
+        width: 80%;
+        margin-right: 0;
+    }
+    .editor__background__input {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 1em;
+        width: 80%;
+        padding: 0.25em 0.7em;
+        justify-content: space-between;
+        max-width: 100%;
+    }
+    .editor__save__btn {
+        margin-left: 0;
+        margin-top: 1em;
+        padding: 0.25em 2.5em;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .main__container {
+        padding-top: 3.5em;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .main__container {
+        font-size: 11px;
+    }
+    .editor__btn, .editor__font, .editor__font__size {
+        font-size: 8px;
+    }
+    .editor__article__title, .editor__background__input {
+        width: 100%;
+    }
+}

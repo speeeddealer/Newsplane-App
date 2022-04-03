@@ -1,0 +1,50 @@
+<nav class="nav__bar">
+	<div class="logo__container">
+		<a href="/" class="newsplane__logo__home__ref">
+			<img class="newsplane__logo" src="/res/newsplane-logo.svg" alt="newsplane-logo" />
+		</a>
+	</div>
+	<div class="ref__wrapper">
+		<li class="nav__ref">
+			<a href="/">Home</a>
+		</li>
+		<li class="nav__ref"><a href="/contact">Contact</a></li>
+		<li class="account__ref">
+			<a class="account__btn" href="/account">
+				<img class="account__icon" src="/res/account-icon.svg" alt="account-icon" />
+				Account
+			</a>
+			<ul class="account__dropdown">
+				<% if (isVerified) { %>
+				<li class="login-logout__btn"><a href="/account/logout">Log out</a></li>
+				<% } else { %>
+				<li class="login-logout__btn"><a href="/account/login">Log in</a></li>
+				<div class="no__account__wrapper">
+					<div class="register__wrapper">
+						<div class="line"></div>
+						<p class="no__account__desc">Don't have an account yet?</p>
+						<div class="line"></div>
+					</div>
+					<li class="register__btn"><a href="/account/register">Register</a></li>
+				</div>
+				<% } %>
+				<div class="account__refs__wrapper">
+					<li class="your__account__btn">
+						<a class="has-icon" href="/account"><img src="/res/your-acc-icon.svg" alt="your-account-icon" />Your account</a>
+					</li>
+					<li class="favs_btn">
+						<a class="has-icon" href="/account/your-articles/?selected=favourites"><img src="/res/favourites-icon.svg" alt="favourites-icon" />Favourites</a>
+					</li>
+					<li class="your__articles__btn">
+						<a class="has-icon" href="/account/your-articles"
+							><img src="/res/your-art-icon.svg" alt="your-articles-icon" />Your articles</a
+						>
+					</li>
+					<li class="account__settings__btn">
+						<a class="has-icon" href="/account"><img src="/res/settings-icon.svg" alt="settings-icon" />Account settings</a>
+					</li>
+				</div>
+			</ul>
+		</li>
+	</div>
+</nav>

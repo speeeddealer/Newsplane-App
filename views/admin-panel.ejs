@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/admin-panel.css" />
+    <title>Admin Panel</title>
+</head>
+<body>
+    <%-include('./templates/t_navbar.ejs')%>
+    <div class="main__container">
+        <div class="account__navigation__wrapper">
+            <a href="/account">Account</a>
+            <img src="/res/right-arrow.svg" alt="right-arrow" />
+            <p>Admin Panel</p>
+        </div>
+        <div class="users__container">
+            <input class="search__input" type="text" placeholder="Search for user">
+            <table class="users__table">
+                <tr>
+                    <th class="table__cell">First Name</th>
+                    <th class="table__cell">Last Name</th>
+                    <th class="table__cell">E-mail</th>
+                    <th class="table__cell">Role</th>
+                    <th class="table__cell">Action</th>
+                </tr>
+                <% if (users) { %>
+                    <% users.forEach(user => { %>
+                        <tr class="user__row">
+                            <td class="table__cell user__data"><%=user.firstName%></td>
+                            <td class="table__cell user__data"><%=user.lastName%></td>
+                            <td class="table__cell user__data"><%=user.email%></td>
+                            <td class="table__cell">
+                                <% if(user.role !== 'admin') { %>
+                                <form action="./admin-panel?_method=PUT" method="POST">
+                                    <select name="<%=user._id%>" id="roleEdit" onchange="this.form.submit()">
+                                        <option <%=user.role === 'Newsplane. User' ? 'selected' : ''%> value="Newsplane. User">Newsplane. User</option>
+                                        <option <%=user.role === 'Newsplane. Redactor' ? 'selected' : ''%> value="Newsplane. Redactor">Newsplane. Redactor</option>
+                                    </select>
+                                </form>
+                                <% } else if (user.role === 'admin') { %>
+                                    Admin
+                                <% } %>
+                            </td>
+                            <td class="table__cell">
+                                <form action="./admin-panel?_method=DELETE" method="POST">
+                                    <button class="admin__delete__btn" type="submit" name="<%=user._id%>">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Search bar
+        const searchBar = document.querySelector('.search__input');
+        const userRows = document.querySelectorAll('.user__row');
+        searchBar.addEventListener('input', () => {
+            const searchValue = searchBar.value.toLowerCase();
+            userRows.forEach(row => {
+                const rowElements = row.querySelectorAll('.user__data');
+                const elementsValues = Array.from(rowElements).map(el => {return el.innerText});
+                if (!elementsValues.some(element => element.toLowerCase().includes(searchValue))) {
+                    row.style.display = 'none';
+                } else row.style.display = 'table-row';
+            });
+        });
+    </script>
+</body>
+</html>

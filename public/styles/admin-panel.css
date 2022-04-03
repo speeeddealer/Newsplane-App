@@ -1,0 +1,97 @@
+body {
+    width: 100vw;
+}
+
+.main__container {
+    width: 100%;
+    padding-top: 4.5em;
+    margin: auto;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* ACCOUNT NAVIGATION */
+
+.account__navigation__wrapper {
+    display: flex;
+    align-items: center;
+    height: 4em;
+    width: 80%;
+    margin: auto;
+}
+.account__navigation__wrapper a {
+    text-decoration: none;
+    color: #393939;
+}
+.account__navigation__wrapper a:hover {
+    color: #FFA505;
+}
+.account__navigation__wrapper img {
+    height: 1em;
+    margin: 0 0.3em;
+}
+.account__navigation__wrapper p {
+    color: #393939;
+}
+
+/* USERS CONTAINER */
+
+.users__container {
+    width: 80%;
+    margin: auto;
+}
+
+.search__input {
+    padding: 0.4em 0.6em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid #7e7e7e;
+    outline: 0;
+    margin-bottom: 2em;
+}
+.search__input:focus {
+    border: 2px solid #333333;
+}
+
+.users__table {
+    border-collapse: collapse;
+    margin: auto;
+}
+.users__table th {
+    font-weight: 600;
+}
+.table__cell {
+    border: 2px solid rgb(204, 204, 204);
+    font-size: 1.25em;
+}
+.users__table tr {
+    background: rgb(240, 240, 240);
+    font-weight: 400;
+}
+.users__table tr:nth-child(2n+1) {
+    background: rgba(223, 223, 223, 0.26);
+}
+.table__cell {
+    padding: 0.6em 2.3em;
+    text-align: center;
+}
+#roleEdit {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9em;
+    border: 2px solid rgb(116, 116, 116);
+    outline: 0;
+    padding: 0.2em;
+}
+#roleEdit:focus {
+    border: 2px solid black;
+}
+.admin__delete__btn {
+    background-color: transparent;
+    border: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.admin__delete__btn:hover {
+    text-decoration: line-through;
+    color: rgb(199, 27, 27);
+}

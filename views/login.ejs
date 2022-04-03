@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/login.css" />
+		<title>Log in to Newsplane.</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<div class="main__container__box">
+			<div class="main__container">
+				<p class="login__header">Log in</p>
+				<form class="login__form" action="/account/login" method="POST">
+					<input name="email" class="login__username-email" type="text" placeholder="E-mail" value="<%=user.email%>"/>
+					<input name="password" class="login__password" type="password" placeholder="Password" />
+					<a class="login__forgot__password" href="">Forgot your password?</a>
+					<% if (user.error) { %>
+						<p style="color:red"><%=user.error%></p>
+					<% } %>
+					<button class="login__form__submit" type="submit">Log in</button>
+				</form>
+				<div class="login__no__account__wrapper">
+					<p>Don't have an account yet?</p>
+					<a class="login__no__account__link" href="/account/register">Register here.</a>
+				</div>
+			</div>
+		</div>
+		<%-include('./templates/t_footer.html')%>
+	</body>
+</html>

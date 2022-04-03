@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/your-account.css" />
+		<title>Account</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<div class="main__container">
+			<div class="account__left">
+				<p class="account__navigation">Account</p>
+				<p class="account__name__header">Hi, <%=`${user.firstName} ${user.lastName}`%>!</p>
+				<form action="./account?_method=PUT" method="POST" class="account__info__container">
+					<label for="firstName">First name</label>
+					<div class="account__input__wrapper">
+						<input type="text" name="firstName" id="firstName" value="<%=user.firstName%>" disabled />
+						<p class="account__edit__btn">Edit</p>
+						<p class="account__cancel-edit__btn">Cancel</p>
+						<p class="account__save-edit__btn">Save</p>
+					</div>
+					<label for="lastName">Last name</label>
+					<div class="account__input__wrapper">
+						<input type="text" name="lastName" id="lastName" value="<%=user.lastName%>" disabled />
+						<p class="account__edit__btn">Edit</p>
+						<p class="account__cancel-edit__btn">Cancel</p>
+						<p class="account__save-edit__btn">Save</p>
+					</div>
+					<label for="username">Username</label>
+					<div class="account__input__wrapper">
+						<input type="text" name="username" id="username" value="<%=user.username%>" disabled />
+						<p class="account__edit__btn">Edit</p>
+						<p class="account__cancel-edit__btn">Cancel</p>
+						<p class="account__save-edit__btn">Save</p>
+					</div>
+					<label for="email">E-mail</label>
+					<div class="account__input__wrapper">
+						<input type="text" name="email" id="email" value="<%=user.email%>" disabled />
+						<p class="account__edit__btn">Edit</p>
+						<p class="account__cancel-edit__btn">Cancel</p>
+						<p class="account__save-edit__btn">Save</p>
+					</div>
+					<label for="password">Password</label>
+					<div class="account__input__wrapper">
+						<input type="password" name="password" id="password" placeholder="********" value="" disabled />
+						<p class="account__edit__btn">Edit</p>
+						<p class="account__cancel-edit__btn">Cancel</p>
+						<p class="account__save-edit__btn">Save</p>
+					</div>
+				</form>
+				<% if (error) { %>
+				<p style="color: red"><%=error%></p>
+				<% } %>
+				<form action="/deleteUser/?_method=DELETE" method="POST" class="account__delete__form">
+					<p class="account__delete__btn">Delete account</p>
+					<div class="confirm__delete__wrapper">
+						<p>Are you sure you want to delete your account?</p>
+						<p>This action cannot be undone.</p>
+						<div class="delete__btns__wrapper">
+							<p class="confirm__delete__btn">Delete</p>
+							<p class="cancel__delete__btn">Cancel</p>
+						</div>
+					</div>
+					<div class="dark__background"></div>
+				</form>	
+			</div>
+			<div class="account__right">
+				<img src="<%=user.profilePic ? `${imgUrl}${user.profilePic}` : '/res/anonim.jpg'%>" alt="<%=user.profilePic ? user.profilePic : 'anonim.jpg'%>" />
+				<form action="./account?_method=PUT" method="POST" class="file__upload__form" enctype="multipart/form-data">
+					<label for="file" class="account__change__picture">Change picture</label>
+					<input type="file" accept="image/png, image/jpeg, image/jpg" name="file" id="file">
+				</form>
+				<div class="role__container">
+					<div class="role__header__container">
+						<div class="account__line"></div>
+						<p class="account__role__header">Role</p>
+						<div class="account__line"></div>
+					</div>
+					<p class="account__role"><%=user.role%></p>
+					<div class="account__line__bottom"></div>
+				</div>
+				<% if (user.role === 'admin') { %>
+					<a class="your__articles__link" href="/account/admin-panel">Admin Panel</a>
+				<% } else { %>
+					<a class="your__articles__link" href="/account/your-articles">Your articles page</a>
+				<% } %>
+			</div>
+		</div>
+		<%-include('./templates/t_footer.html')%>
+		<script>
+			const editButtons = document.querySelectorAll(".account__edit__btn");
+			const form = document.querySelector(".account__info__container");
+			editButtons.forEach(button => {
+				button.addEventListener("click", e => {
+					const thisEditBtn = e.target;
+					editButtons.forEach(btn => (btn.style.display = "none"));
+					const targetParent = thisEditBtn.parentElement;
+					const cancelBtn = targetParent.getElementsByClassName("account__cancel-edit__btn")[0];
+					const saveBtn = targetParent.getElementsByClassName("account__save-edit__btn")[0];
+					cancelBtn.style.display = "block";
+					saveBtn.style.display = "block";
+
+					const inputElement = targetParent.getElementsByTagName("input")[0];
+					const inputValue = inputElement.value;
+					inputElement.disabled = false;
+
+					// SAVE FUNCTION
+					saveBtn.addEventListener("click", saveChanges);
+
+					// CANCEL FUNCTION
+					cancelBtn.addEventListener("click", cancelChanges);
+
+					function saveChanges() {
+						changeBtnDisplay(cancelBtn, saveBtn, thisEditBtn);
+
+						// Remove listeners so they don't execute multiple times
+						this.removeEventListener("click", saveChanges);
+						cancelBtn.removeEventListener("click", cancelChanges);
+
+						// Enable all inputs so the values can be send to DB
+						const inputs = document.querySelectorAll("input");
+						inputs.forEach(input => (input.disabled = true));
+						inputElement.disabled = false;
+
+						// Send changes to DB
+						form.submit();
+
+						// Disable all inputs
+						inputs.forEach(input => (input.disabled = true));
+
+						// Enable edit buttons
+						editButtons.forEach(btn => (btn.style.display = "block"));
+					}
+
+					function cancelChanges() {
+						changeBtnDisplay(cancelBtn, saveBtn, thisEditBtn);
+
+						inputElement.value = inputValue;
+						inputElement.disabled = true;
+
+						this.removeEventListener("click", cancelChanges);
+						saveBtn.removeEventListener("click", saveChanges);
+
+						// Enable edit buttons
+						editButtons.forEach(btn => (btn.style.display = "block"));
+					}
+				});
+			});
+
+			// Change display of buttons
+			const changeBtnDisplay = (cBtn, sBtn, eBtn) => {
+				cBtn.style.display = "none";
+				sBtn.style.display = "none";
+				eBtn.style.display = "block";
+			};
+
+			// Confirm delete wrapper
+			const darkBackground = document.querySelector('.dark__background');
+			const confirmDeleteWrapper = document.querySelector('.confirm__delete__wrapper');
+			const deleteForm = document.querySelector('.account__delete__form');
+			document.querySelector('.account__delete__btn').addEventListener('click', () => {
+				darkBackground.style.display = 'inline';
+				confirmDeleteWrapper.style.display = 'flex';
+			});
+			document.querySelector('.cancel__delete__btn').addEventListener('click', () => {
+				darkBackground.style.display = 'none';
+				confirmDeleteWrapper.style.display = 'none';
+			});
+			document.querySelector('.confirm__delete__btn').addEventListener('click', () => {
+				deleteForm.submit();
+			});
+
+			// Image upload
+			const pictureForm = document.querySelector('.file__upload__form');
+			const pictureInput = document.querySelector('#file');
+			pictureInput.addEventListener('input', () => {
+				pictureForm.submit();
+			});
+		</script>
+	</body>
+</html>

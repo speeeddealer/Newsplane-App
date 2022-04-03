@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="styles/contact.css" />
+		<title>Contact Newsplane.</title>
+	</head>
+	<body>
+        <%-include('./templates/t_navbar.ejs')%>
+        <div class="main__container">
+            <div class="contact__wrapper">
+				<p class="contact__head">&bull; &nbsp; Main Facility</p>
+				<p class="contact__desc">
+					Country, City, Postcode <br>
+					st. Street Building/Apartment
+					<br><br>
+					Opening hours: <br>
+					Mon-Fri 9.30am-5.00pm
+					<p data-text-red>Opening hours may be shorter during holidays.</p>
+				</p>
+				<br>
+				<p class="contact__head">&bull; &nbsp; Help and Contact</p>
+				<p class="contact__desc">
+					Email: <a href="mailto:newspaper@mail.com">newsplane@mail.com</a> <br>
+					Phone: 608 345 827
+				</p>
+				<br>
+				<p class="contact__head">&bull; &nbsp; Social Media</p>
+				<p class="contact__desc">
+					Facebook: <a href="https://facebook.com">facebook.com</a> <br>
+					Twitter: <a href="https://twitter.com">twitter.com</a> <br>
+					LinkedIn: <a href="https://linkedin.com">linkedin.com</a> <br>
+				</p>
+				<br>
+				<p class="contact__head" id="credits">&bull; &nbsp; Credits</p>
+				<p class="contact__desc">
+					<a href="https://iconmonstr.com/twitter-3-svg/">Twitter Icon</a> <br>
+					<a href="https://iconmonstr.com/facebook-3-svg/">Facebook Icon</a> <br>
+					<a href="https://iconmonstr.com/linkedin-3-svg/">LinkedIn Icon</a> <br>
+					<a href="https://iconmonstr.com/user-6-svg/">Account Icon</a> <br>
+					<a href="https://iconmonstr.com/user-circle-thin-svg/"> Your account Icon</a> <br>
+					<a href="https://iconmonstr.com/heart-thin-svg/">Favourites Icon</a> <br>
+					<a href="https://iconmonstr.com/school-26-svg/">Your articles Icon</a> <br>
+					<a href="https://iconmonstr.com/gear-thin-svg/">Settings Icon</a> <br>
+					<a href="https://iconmonstr.com/edit-8-svg/">Edit Icon</a> <br>
+					<a href="https://iconmonstr.com/x-mark-2-svg/">Delete Icon</a> <br>
+					<a href="https://iconmonstr.com/plus-2-svg/">Plus Symbol</a> <br>
+					<a href="https://newsapi.org/">"See also" Home Page News API</a> <br>
+				</p>
+			</div>
+			<div class="picture__wrapper">
+				<img src="https://pix8.agoda.net/hotelImages/782/782823/782823_17081514580055400357.jpg?s=1024x768" alt="building-picture">
+				<p class="picture__source">Source: <a href="https://pix8.agoda.net/hotelImages/782/782823/782823_17081514580055400357.jpg?s=1024x768">https://pix8.agoda.net/hotelImages/782/782823/782823_17081514580055400357.jpg?s=1024x768</a></p>
+			</div>
+        </div>
+        <%-include('./templates/t_footer.html')%>
+    </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/text-editor.css" />
+		<script src="https://kit.fontawesome.com/414264ff9d.js" crossorigin="anonymous"></script>
+		<title>Article Editor</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<form class="main__container" action="./new" method="POST" enctype="multipart/form-data">
+            <div class="account__navigation__wrapper">
+				<a href="/account">Account</a>
+				<img src="/res/right-arrow.svg" alt="right-arrow" />
+				<a href="/account/your-articles">Your articles</a>
+				<img src="/res/right-arrow.svg" alt="right-arrow" />
+				<p>Article Editor</p>
+			</div>
+            <div class="editor__header">
+                <input class="editor__article__title" type="text" placeholder="Article's title" name="articleTitle" required value="<%=article.articleTitle || ''%>">
+                <label class="editor__background__input" for="file">Background picture<p>Upload</p></label>
+                <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" required hidden>
+                <button class="editor__save__btn" type="submit">Save</button>
+            </div>
+			<div class="editor__container">
+				<div class="editor__controls__container">
+					<button class="editor__btn" type="button" data-option="bold">
+						<i class="fa fa-bold"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="italic">
+						<i class="fa fa-italic"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="underline">
+						<i class="fa fa-underline"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="strikeThrough">
+						<i class="fa fa-strikethrough"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="insertUnorderedList">
+						<i class="fa fa-list"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="insertOrderedList">
+						<i class="fa fa-list-ol"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="justifyLeft">
+						<i class="fa fa-align-left"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="justifyCenter">
+						<i class="fa fa-align-center"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="justifyRight">
+						<i class="fa fa-align-right"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="justifyFull">
+						<i class="fa fa-align-justify"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="undo">
+						<i class="fa fa-undo"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="redo">
+						<i class="fa fa-redo"></i>
+					</button>
+					<button class="editor__btn" type="button" data-option="createLink">
+						<i class="fa fa-link"></i>
+					</button>
+					<select class="editor__font" data-option="fontName">
+						<option style="font-family: 'Arial', sans-serif;" value="Arial">Arial</option>
+						<option style="font-family: 'Courier', sans-serif;" value="Courier">Courier</option>
+						<option style="font-family: 'Georgia', sans-serif;" value="Georgia">Georgia</option>
+						<option style="font-family: 'Tahoma', sans-serif;" value="Tahoma">Tahoma</option>
+						<option style="font-family: 'Times New Roman', sans-serif;" value="Times New Roman">Times New Roman</option>
+						<option style="font-family: 'Raleway', sans-serif;" value="Raleway">Raleway</option>
+						<option style="font-family: 'Poppins', sans-serif;" value="Poppins">Poppins</option>
+					</select>
+					<select class="editor__font__size" data-option="fontSize">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</div>
+				<div class="editor__content" contenteditable="true"><%=article.articleContent || ''%></div>
+				<input id="editor-content-holder" type="text" value="" name="articleContent" hidden required>
+			</div>
+		</form>
+		<%-include('./templates/t_footer.html')%>
+		<script>
+			const buttons = document.querySelectorAll(".editor__btn");
+			const selects = document.querySelectorAll("select");
+			buttons.forEach(button => {
+				button.addEventListener("click", () => {
+					const command = button.dataset["option"];
+					if (command === "createLink") {
+						const url = prompt("Please provide url: ", "http://");
+						document.execCommand(command, false, url);
+					} else document.execCommand(command, false, null);
+				});
+			});
+			selects.forEach(select => {
+				select.addEventListener("change", () => {
+					const command = select.dataset["option"];
+					document.execCommand(command, false, select.value);
+                    if (select.className === 'editor__font') select.style.fontFamily = `"${select.value}", sans-serif`;
+				});
+			});
+
+			const fileInput = document.querySelector('#file');
+			const fileInputLabel = document.querySelector('.editor__background__input');
+			const articleTitle = document.querySelector('.editor__article__title');
+
+			// Submit button 
+			const saveBtn = document.querySelector(".editor__save__btn");
+			const hiddenInput = document.querySelector('#editor-content-holder');
+			const editorContent = document.querySelector('.editor__content');
+			saveBtn.addEventListener('click', () => {
+				// Append text to hidden input
+				const content = editorContent.innerHTML;
+				hiddenInput.value = content;
+
+				if (!fileInput.value) fileInputLabel.style.border = '2px solid red';
+				if (!articleTitle.value) {
+					articleTitle.style.border = '2px solid red';
+				} else articleTitle.style.border = '1px solid #bebebe';
+				if (!hiddenInput.value) {
+					editorContent.style.border = '2px solid red';
+				} else editorContent.style.border = '0';
+			});
+
+			// File input
+			fileInput.addEventListener('input', () => {
+				if (fileInput.value) {
+					fileInputLabel.innerHTML = fileInputLabel.innerHTML.replace('Background picture', `${fileInput.files[0].name.slice(0,10)}...`);
+					fileInputLabel.style.border = '2px solid green';
+				}
+			})
+
+			// Format editor content
+			editorContent.innerHTML = editorContent.textContent;
+		</script>
+	</body>
+</html>

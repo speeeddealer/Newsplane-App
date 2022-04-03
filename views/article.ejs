@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/article.css" />
+		<title>Newsplane.: <%=article.articleTitle%></title>
+	</head>
+	<body>
+        <%-include('./templates/t_navbar.ejs')%>
+        <div class="main__container">
+            <div class="article__background__wrapper">
+                <img class="article__background" src="<%=`${imgUrl}${article.imageName}`%>" alt="<%=article.imageName%>">
+                <p class="article__title"><%=article.articleTitle%></p>
+                <% if (user) { %>
+                <form class="to-favourites__wrapper" action="./?_method=PUT" method="POST">
+                    <button name="articleId" value="<%=article._id%>" type="submit">
+                        <p><%= user.favourites.includes(article._id) ? "Favourite" : "Add to favourites" %></p>
+                        <img src="/res/favourites-icon.svg" alt="favourites-icon">
+                    </button>
+                </form>
+                <% } %>
+            </div>
+            <div class="article__content__container">
+                <div class="article__author__wrapper__top">
+                    <p class="article__author__name"><%=`${author.firstName} ${author.lastName}`%></p>
+                    <p data-text-bullet>&bull;</p>
+                    <p class="article__publication__date"><%=`${(String(article.createDate.getUTCDate()).length<2 ? `0${article.createDate.getUTCDate()}`:`${article.createDate.getUTCDate()}`)}.${(String(article.createDate.getUTCMonth() + 1).length<2 ? `0${article.createDate.getUTCMonth() + 1}`:`${article.createDate.getUTCMonth() + 1}`)}.${article.createDate.getUTCFullYear()}`%></p>
+                    <p data-text-bullet>&bull;</p>
+                    <p class="article__publication__hour"><%=(String(article.createDate.getHours()).length<2 ? `0${article.createDate.getHours()}`:`${article.createDate.getHours()}`)+':'+(String(article.createDate.getMinutes()).length<2 ? `0${article.createDate.getMinutes()}`:`${article.createDate.getMinutes()}`)%></p>
+                </div>
+                <div class="article__content__wrapper">
+                    <p class="article__content"><%=article.articleContent%></p>
+                </div>
+                <div class="article__author__wrapper__bottom">
+                    <img class="article__author__picture" src="<%=author.profilePic ? `${imgUrl}${author.profilePic}` : '/res/anonim.jpg'%>" alt="<%=author.profilePic ? author.profilePic : 'anonim.jpg'%>">
+                    <div class="article__author__info__wrapper">
+                        <p class="article__author__name__bottom"><%=`${author.firstName} ${author.lastName}`%></p>
+                        <p class="article__author__role"><%=author.role%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-include('./templates/t_footer.html')%>
+
+        <script>
+            // Format article content
+            const articleContent = document.querySelector('.article__content');
+            articleContent.innerHTML = articleContent.textContent;
+        </script>
+    </body>
+</html>

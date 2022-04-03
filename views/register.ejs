@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/register.css" />
+		<title>Register</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<div class="main__container">
+			<div class="register__container">
+				<p class="register__header">Create an account</p>
+				<form class="register__form" action="" method="POST">
+					<input
+						name="firstName"
+						class="register__firstname"
+						type="text"
+						placeholder="First name (required)"
+						value="<%=user.firstName%>"
+					/>
+					<input
+						name="lastName"
+						class="register__lastname"
+						type="text"
+						placeholder="Last name (required)"
+						value="<%=user.lastName%>"
+					/>
+					<input
+						name="username"
+						class="register__username"
+						type="text"
+						placeholder="Username (required)"
+						value="<%=user.username%>"
+					/>
+					<input
+						name="email"
+						class="register__email"
+						type="text"
+						placeholder="E-mail (required)"
+						value="<%=user.email%>"
+					/>
+					<input
+						name="password"
+						class="register__password"
+						type="password"
+						placeholder="Password (required)"
+					/>
+					<input
+						name="confirmPassword"
+						class="register__confirm__password"
+						type="password"
+						placeholder="Confirm password (required)"
+					/>
+					<% if (user.error) { %>
+						<p style="color:red; padding-top:0.4em"><%=user.error%></p>
+					<% } %>
+					<button class="register__form__submit" type="submit">
+						Register
+					</button>
+				</form>
+			</div>
+			<div class="register__has__account__wrapper">
+				<p>Have an account already?</p>
+                <img src="/res/arrow.svg" alt="arrow.svg">
+				<a class="register__has__account__link" href="/account/login"
+					>Log in here.</a
+				>
+			</div>
+		</div>
+		<%-include('./templates/t_footer.html')%>
+		<script>
+			// DOM elements
+			const confirmPasswordInput = document.querySelector('.register__confirm__password');
+			const passwordInput = document.querySelector('.register__password');
+
+			// Red border if passwords don't match
+			confirmPasswordInput.addEventListener('input', () => {
+				if (confirmPasswordInput.value !== passwordInput.value) {
+					confirmPasswordInput.style.border = '1px solid rgba(255,0,0,1)';
+				} else {
+					confirmPasswordInput.style.border = '1px solid rgba(0,0,0,0.12)';
+				}
+			});
+		</script>
+	</body>
+</html>

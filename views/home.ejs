@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="styles/footer.css">
+		<link rel="stylesheet" type="text/css" href="styles/home.css">
+		<title>Welcome to Newsplane.</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<div class="main__container">
+			<div class="left__container">
+				<div class="slider__container">
+					<img class="slider__arrow prevBtn" src="res/arrow-left.svg" alt="arrow-left">
+					<img class="slider__arrow nextBtn" src="res/arrow-right.svg" alt="arrow-right">
+					<div class="slider">
+						<% if (DBMostViewedArticles.length > 1) { %>
+							<% for (let i=0; i <= (DBMostViewedArticles.length+1); i++) { %>
+								<% let counter = i-1 %>
+								<% if (i === 0) counter = DBMostViewedArticles.length-1 %>
+								<% if (i === DBMostViewedArticles.length+1) counter = 0 %>
+								<a href="/article/<%=DBMostViewedArticles[counter]._id%>" class="slider__card <%=(i===0 ? "firstSlide" : "")%> <%=(i===(DBMostViewedArticles.length+1) ? "lastSlide" : "")%>">
+									<img class="slider__card__image" src="<%=`${imgUrl}${DBMostViewedArticles[counter].imageName}`%>" alt="<%=DBMostViewedArticles[counter].imageName%>">
+									<div class="slider__title__wrapper">
+										<p class="slider__card__title"><%=DBMostViewedArticles[counter].articleTitle%></p>
+									</div>
+								</a>
+							<% } %>
+						<% } else { %>
+							<div class="empty__slider">
+								<p class="empty__slider__message">No articles here, sorry...</p>
+							</div>
+						<% } %>
+					</div>
+				</div>
+				<div class="latest__articles__container">
+					<p class="latest__articles__header">Latest articles</p>
+					<div class="articles__wrapper">
+						<% if (DBArticles.length > 0) { %>
+							<% DBArticles.forEach(dbArticle => { %>
+								<a class="article__card" href="/article/<%=dbArticle._id%>">
+									<img class="article__card__image" src="<%=`${imgUrl}${dbArticle.imageName}`%>" alt="<%=dbArticle.imageName%>">
+									<p class="article__card__title"><%=dbArticle.articleTitle%></p>
+									<p class="article__card__content"><%=dbArticle.articleContent%></p>
+								</a>
+							<% }) %>
+						<% } else { %>
+							<p class="no__articles__message">Sorry, we didn't find any articles. Try visiting us later...</p>
+						<% } %>
+					</div>
+				</div>
+			</div>
+			<div class="right__container">
+				<p class="right__container__header">See also</p>
+				<div class="see-also__articles__container">
+					<% if (fetchedArticles) { %>
+						<% fetchedArticles.forEach(article => { %>
+							<a href="<%=article.url%>" class="see-also__article__wrapper">
+								<img class="see-also__image" src="<%=article.imageUrl || 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/No_picture_available.png/602px-No_picture_available.png'%>" alt="<%=article.title.slice(0,15)%>">
+								<div class="see-also__desc__container">
+									<p class="see-also__source"><%=article.source%></p>
+									<p class="see-also__title"><%=article.title%></p>
+								</div>
+							</a>
+						<% }) %>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<%-include('./templates/t_footer.html')%>
+		<script>
+			// ARTICLE CARD CONTENT
+			const articleContent = document.querySelectorAll('.article__card__content');
+			articleContent.forEach(content => {
+				content.innerHTML = content.textContent;
+			})
+
+			// SLIDER CODE
+			const nextBtn = document.querySelector(".nextBtn");
+			const prevBtn = document.querySelector(".prevBtn");
+			const slider = document.querySelector(".slider");
+			const slides = document.querySelectorAll(".slider__card");
+
+			let size = slides[0].clientWidth;
+			let counter = 1;
+
+			slider.style.transform = `translateX(-${size * counter}px)`;
+
+			prevBtn.addEventListener("click", () => {
+				clearInterval(interval);
+				interval = setInterval(switchSlide, 5000);
+				size = slides[0].clientWidth;
+
+				if (counter >= slides.length - 1) return;
+				counter++;
+				slider.style.transition = "all 0.4s ease";
+				slider.style.transform = `translateX(-${size * counter}px)`;
+			});
+
+			nextBtn.addEventListener("click", () => {
+				clearInterval(interval);
+				interval = setInterval(switchSlide, 5000);
+				size = slides[0].clientWidth;
+				if (counter <= 0) return;
+				counter--;
+				slider.style.transition = "all 0.4s ease";
+				slider.style.transform = `translateX(-${size * counter}px)`;
+			});
+
+			slider.addEventListener("transitionend", () => {
+				size = slides[0].clientWidth;
+				if (slides[counter].classList.contains("firstSlide")) {
+					slider.style.transition = "none";
+					counter = slides.length - 2;
+					slider.style.transform = `translateX(-${size * counter}px)`;
+				}
+
+				if (slides[counter].classList.contains("lastSlide")) {
+					slider.style.transition = "none";
+					counter = 1;
+					slider.style.transform = "translateX(-" + size * counter + "px)";
+				}
+			});
+
+			function switchSlide() {
+				prevBtn.click();
+			};
+			let interval = setInterval(switchSlide, 5000);
+
+		</script>
+	</body>
+</html>

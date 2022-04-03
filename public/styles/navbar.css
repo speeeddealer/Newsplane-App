@@ -1,0 +1,252 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+}
+
+.nav__bar {
+	font-family: "Raleway", sans-serif;
+	background-color: white;
+	-webkit-box-shadow: 0px 3px 6px 1px rgba(66, 68, 90, 0.22);
+	-moz-box-shadow: 0px 3px 6px 1px rgba(66, 68, 90, 0.22);
+	box-shadow: 0px 3px 6px 1px rgba(66, 68, 90, 0.22);
+	display: flex;
+	height: 4.5em;
+    position: fixed;
+    width: 100vw;
+	z-index: 999;
+}
+.ref__wrapper {
+	flex: 1;
+	padding-right: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.ref__wrapper li {
+	list-style: none;
+}
+.nav__ref a {
+	color: #393939;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.4em;
+	transition: all 0.2s ease;
+}
+.nav__ref:hover a {
+	color: #ffa505;
+}
+.account__btn {
+	color: white;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.4em;
+	background-color: #ffa505;
+	padding: 0.5em 0.9em;
+	border-radius: 0.7em;
+	display: flex;
+	align-items: center;
+}
+.account__icon {
+	height: 1.2em;
+	padding-right: 0.8em;
+}
+.logo__container {
+	flex: 1.5;
+	padding-left: 3em;
+}
+.newsplane__logo__home__ref {
+	height: 95%;
+}
+.newsplane__logo {
+	height: 100%;
+}
+.account__ref {
+	position: relative;
+	z-index: 2;
+}
+.account__dropdown {
+	display: none;
+	flex-direction: column;
+	z-index: -1;
+	position: absolute;
+	background-color: white;
+	width: 18em;
+	top: 75%;
+	right: 0;
+	padding: 0.7em 1em;
+	-webkit-box-shadow: 0px 1px 6px 0px rgba(66, 68, 90, 0.25);
+	-moz-box-shadow: 0px 1px 6px 0px rgba(66, 68, 90, 0.25);
+	box-shadow: 0px 1px 6px 0px rgba(66, 68, 90, 0.25);
+	align-items: center;
+	border-top-left-radius: 1.5em;
+	border-bottom-left-radius: 1.5em;
+	border-bottom-right-radius: 1.5em;
+}
+.account__dropdown a {
+	color: #393939;
+	text-decoration: none;
+	font-size: 1.1em;
+	font-weight: 600;
+	width: 100%;
+	height: 100%;
+}
+.login-logout__btn,
+.your__account__btn,
+.favs_btn,
+.your__articles__btn,
+.account__settings__btn {
+	margin-top: 1em;
+}
+.account__ref:hover .account__dropdown {
+	display: flex;
+	animation: slidedown 0.4s;
+}
+.account__ref:hover .account__btn {
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(66, 68, 90, 0.25);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(66, 68, 90, 0.25);
+	box-shadow: 0px 1px 2px 0px rgba(66, 68, 90, 0.25);
+}
+.login-logout__btn {
+	background-color: #ffa505;
+	width: 16em;
+	height: 2em;
+	border-radius: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	line-height: 2em;
+	vertical-align: middle;
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.login-logout__btn:hover {
+	-webkit-box-shadow: inset 0px 0px 0px 0.15em rgba(255, 165, 5, 1);
+	-moz-box-shadow: inset 0px 0px 0px 0.15em rgba(255, 165, 5, 1);
+	box-shadow: inset 0px 0px 0px 0.15em rgba(255, 165, 5, 1);
+	background-color: white;
+}
+.login-logout__btn:hover a {
+	color: #ffa505;
+}
+.login-logout__btn a {
+	color: white;
+	font-weight: 700;
+	border-radius: 1em;
+}
+
+.no__account__wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.register__wrapper {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0.7em;
+}
+.no__account__desc {
+	font-size: 0.75em;
+	color: rgba(0, 0, 0, 0.4);
+	font-weight: 700;
+}
+.line {
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 2.2em;
+	height: 0.1em;
+	margin: 0em 0.35em;
+}
+.register__btn {
+	margin-top: 0.7em;
+	background-color: white;
+	border: 0.15em solid #ffa505;
+	width: 16em;
+	height: 2em;
+	border-radius: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	line-height: 1.7em;
+	vertical-align: middle;
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.register__btn:hover {
+	background-color: #ffa505;
+}
+.register__btn:hover a {
+	color: white;
+}
+.register__btn a {
+	color: #ffa505;
+	border-radius: 1em;
+}
+.account__dropdown .has-icon {
+	display: flex;
+	align-items: center;
+}
+.has-icon img {
+	height: 1.2em;
+	margin-right: 0.7em;
+}
+.account__refs__wrapper {
+	width: 90%;
+}
+.has-icon:hover {
+	opacity: 0.9;
+}
+
+@keyframes slidedown {
+	from {
+		transform: translateY(-1em);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0em);
+		opacity: 1;
+	}
+}
+
+
+/* -- MEDIA SCREEN -- */
+
+@media screen and (max-width: 950px) {
+    .ref__wrapper {
+		flex: 2;
+	}
+}
+
+@media screen and (max-width: 850px) {
+	.nav__bar {
+		font-size: 14px;
+	}
+	.ref__wrapper {
+		flex: 5;
+	}
+}
+
+@media screen and (max-width: 460px) {
+	.nav__bar {
+		font-size: 11px;
+	}
+	.ref__wrapper {
+		padding-right: 0.5em;
+	}
+	.logo__container {
+		padding-left: 0.5em;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.account__icon {
+		display: none;
+	}
+}

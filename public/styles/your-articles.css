@@ -1,0 +1,310 @@
+/* MAKE FOOTER STICK TO BOTTOM */
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    width: 100vw;
+    align-items: center;
+}
+
+.main__container {
+    padding-top: 4.5em;
+    width: 80%;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ACCOUNT NAVIGATION */
+
+.account__navigation__wrapper {
+    display: flex;
+    align-items: center;
+    height: 4em;
+}
+.account__navigation__wrapper a {
+    text-decoration: none;
+    color: #393939;
+}
+.account__navigation__wrapper a:hover {
+    color: #FFA505;
+}
+.account__navigation__wrapper img {
+    height: 1em;
+    margin: 0 0.3em;
+}
+.account__navigation__wrapper p {
+    color: #393939;
+}
+
+/* - USER NAME & BUTTON - */
+
+.user__name__and__btn__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.account__user__name {
+    font-size: 2em;
+}
+.write-article__btn__wrapper {
+    position: relative;
+    margin-left: auto;
+}
+.write-article__btn {
+    width: 8.5em;
+    height: 2.1em;
+    background-color: #FFA505;
+    border: 0;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.7em;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.35em 0.5em 0.35em 1.9em;
+    text-decoration: none;
+}
+.write-article__plus__symbol {
+    position: absolute;
+    left: 5%;
+    bottom: 50%;
+    width: 2em;
+    height: 2em;
+    transform: translateY(50%);
+    pointer-events: none;
+}
+
+/* - ARTICLES CONTAINER - */
+
+.articles__container {
+    width: 100%;
+    align-self: center;
+    margin-top: 2em;
+    border-radius: 2.5em;
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.25);
+    padding: 1.8em 1.8em;
+}
+
+/* - ARTICLES FILTER - */
+
+#articles-filter {
+    padding: 0.2em 0.4em;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    border: 2px solid #393939;
+    outline: 0;
+    margin: 0 .8em;
+}
+
+/* - ARTICLES WRAPPER - */
+
+.articles__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26.5em, 1fr));
+    margin-top: 1em;
+}
+.article__card {
+    width: 26em;
+    height: 15em;
+    position: relative;
+    border: 4px solid #FFA505;
+    background-color: #FFA505;
+    margin: 1em auto;
+}
+.article__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.article__card form {
+    width: 16%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.edit__btn__wrapper, .delete__btn__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+}
+.edit__btn__wrapper {
+    height: 35%;
+    background-color: #FFA505;
+    justify-content: space-evenly;
+    transition: all .4s ease;
+}
+.edit__btn__wrapper:hover {
+    background-color: #ffbe4d;
+}
+.edit__btn__wrapper:hover img {
+    animation: shake-top 0.6s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+.edit__btn__wrapper img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    pointer-events: none;
+    padding-left: .1em;
+}
+.delete__btn__wrapper {
+    height: 65%;
+    background-color: #D3483F;
+    transition: all .4s ease;
+}
+.delete__btn__wrapper:hover {
+    background-color: #d1291d;
+}
+.delete__btn__wrapper:hover img {
+    animation: shake-top 0.6s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+.delete__btn__wrapper img {
+    width: 40%;
+    height: 30%;
+    object-fit: contain;
+    pointer-events: none;
+    margin: .3em 0;
+}
+.article__edit__btn, .article__delete__btn {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 1em;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.blank__edit__space {
+    width: 100%;
+    height: 35%;
+    cursor: pointer;
+}
+.article__title__wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 76%;
+    background-color: #FFA505;
+    border-top-right-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5%;
+}
+.article__title {
+    color: white;
+    font-weight: 600;
+    line-height: 1.3em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+.no__articles__message {
+    text-align: center;
+    font-size: 1.4em;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-40%);
+}
+
+@keyframes shake-top {
+    0%,
+    100% {
+      transform: rotate(0deg);
+      transform-origin: 50% 0;
+    }
+    10% {
+      transform: rotate(2deg);
+    }
+    20%,
+    40%,
+    60% {
+      transform: rotate(-4deg);
+    }
+    30%,
+    50%,
+    70% {
+      transform: rotate(4deg);
+    }
+    80% {
+      transform: rotate(-2deg);
+    }
+    90% {
+      transform: rotate(2deg);
+    }
+}
+
+
+/* MEDIA SCREEN */
+
+@media screen and (max-width: 1150px) {
+    .articles__wrapper {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .articles__wrapper {
+        font-size: 11.5px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .main__container {
+        padding-top: 4em;
+    }
+    .articles__wrapper {
+        font-size: 16px;
+    }
+    
+}
+
+@media screen and (max-width: 700px) {
+    .account__navigation__wrapper, .user__name__and__btn__wrapper {
+        font-size: 13px;
+    }
+    .articles__container {
+        font-size: 14px;
+    }
+    .articles__wrapper {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    .main__container {
+        padding-top: 3em;
+    }
+
+    .user__name__and__btn__wrapper {
+        flex-direction: column;
+    }
+    .write-article__btn__wrapper {
+        margin-top: 2em;
+        margin-left: 0;
+    }
+    .articles__container {
+        font-size: 10px;
+        width: 110%;
+    }
+    .articles__wrapper {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .articles__wrapper {
+        font-size: 8px;
+    }
+}

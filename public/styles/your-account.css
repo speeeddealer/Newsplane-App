@@ -1,0 +1,292 @@
+/* MAKE FOOTER STICK TO BOTTOM */
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    align-items: center;
+}
+
+.main__container {
+    width: 80vw;
+    padding-top: 4.5em;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+/* --- ACCOUNT LEFT --- */
+
+.account__navigation {
+    color: #393939;
+    padding: 1.4em 0;
+}
+.account__name__header {
+    font-size: 2em;
+    padding: 0.3em 0 1em 0;
+}
+
+.account__info__container {
+    width: 45em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* - EDIT ACCOUNT INPUTS - */
+
+.account__input__wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.6em;
+    position: relative;
+}
+.account__input__wrapper p {
+    padding-left: 0.5em;
+    color: #393939;
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+}
+.account__input__wrapper p:hover {
+    color: black;
+}
+.account__cancel-edit__btn {
+    display: none;
+}
+.account__save-edit__btn {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 52%;
+}
+
+.account__info__container label {
+    padding: 0 0 0.2em 1em;
+    font-weight: 500;
+}
+.account__info__container input {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2em;
+    padding: 0.4em 1.5em;
+    width: 60%;
+    border-radius: 1em;
+    border: 1px solid rgba(0,0,0,0.12);
+    background-color: #bababa13;
+    color: #393939;
+}
+.account__info__container input:focus {
+    outline: 1px solid #393939ab;
+}
+.account__delete__btn {
+    color: #BD0000;
+    text-decoration: underline;
+    cursor: pointer;
+    width: fit-content;
+    padding: 2em 0 0 1em;
+}
+.account__delete__btn:hover {
+    color: #ff0000;
+}
+
+.confirm__delete__wrapper {
+    background-color: white;
+    width: 32em;
+    height: 8em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.15em;
+    line-height: 1.5em;
+    display: none;
+    transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    /* display: flex; */
+}
+.delete__btns__wrapper {
+    font-weight: 500;
+    display: flex;
+    margin-top: 0.9em;
+}
+.confirm__delete__btn {
+    cursor: pointer;
+    color: #BD0000;
+    margin-right: 1.5em;
+}
+.cancel__delete__btn {
+    cursor: pointer;
+}
+.confirm__delete__btn:hover, .cancel__delete__btn:hover {
+    text-decoration: underline;
+}
+.dark__background {
+    background-color: rgba(0, 0, 0, 0.644);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: none;
+}
+
+/* --- ACCOUNT RIGHT --- */
+
+.account__right {
+    width: 20em;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4em;
+}
+.account__right img {
+    height: 25em;
+    width: 18em;
+    object-fit: cover;
+}
+.account__change__picture {
+    padding: 0.5em 0;
+    color: #393939;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.account__change__picture:hover {
+    color: black;
+}
+#file {
+    display: none;
+}
+.file__upload__form {
+    margin-top: 0.5em;
+}
+.role__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.role__header__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    padding: 0.5em 0;
+}
+.account__line {
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 20%;
+	height: 0.1em;
+	margin: 0em 10%;
+}
+.account__role__header {
+    font-size: 1.6em;
+    color: #292929;
+}
+.account__role {
+    font-size: 1.8em;
+    width: 80%;
+    overflow-wrap: break-word;
+    text-align: center;
+    font-weight: 500;
+}
+.account__line__bottom {
+    background-color: rgba(0, 0, 0, 0.5);
+	width: 79%;
+	height: 0.1em;
+	margin: .6em 10%;
+}
+.your__articles__link {
+    color: #393939;
+    font-size: 1.4em;
+    padding-top: 0.7em;
+}
+.your__articles__link:hover {
+    color: black;
+}
+
+
+/* MEDIA SCREEN */
+
+@media screen and (max-width: 1100px) {
+    .account__left, .account__right {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .account__left, .account__right {
+        font-size: 12.5px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .main__container {
+        padding-top: 4em;
+    }
+    .account__right {
+        padding-top: 7em;
+        margin-left: 0;
+        font-size: 11px;
+    }
+    .account__left {
+        width: 35em;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .main__container {
+        flex-direction: column;
+    }
+    .account__left {
+        margin: auto;
+        font-size: 14px;
+        width: 100%;
+    }
+    .account__right {
+        margin: auto;
+        padding-top: 3em;
+        padding-bottom: 3em;
+        font-size: 13px;
+    }
+    .account__delete__btn {
+        padding: 0 0 0 1em;
+    }
+    .account__info__container {
+        width: 100%;
+    }
+    .account__info__container input {
+        width: 90%;
+    }
+    .account__save-edit__btn {
+        left: 68%;
+    }
+
+    .confirm__delete__wrapper {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .main__container {
+        padding-top: 3em;
+    }
+    
+    .account__left, .account__right {
+        font-size: 12px;
+    }
+
+    .confirm__delete__wrapper {
+        font-size: 11px;
+    }
+}

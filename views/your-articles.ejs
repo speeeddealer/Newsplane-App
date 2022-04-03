@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" type="text/css" href="/styles/navbar.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/footer.css" />
+		<link rel="stylesheet" type="text/css" href="/styles/your-articles.css" />
+		<title>Your articles</title>
+	</head>
+	<body>
+		<%-include('./templates/t_navbar.ejs')%>
+		<div class="main__container">
+			<div class="account__navigation__wrapper">
+				<a href="/account">Account</a>
+				<img src="/res/right-arrow.svg" alt="right-arrow" />
+				<p>Your articles</p>
+			</div>
+			<div class="user__name__and__btn__wrapper">
+				<p class="account__user__name">Hi, <%=`${user.firstName} ${user.lastName}`%>!</p>
+				<% if (user.role !== 'Newsplane. User') { %>
+				<div class="write-article__btn__wrapper">
+					<a class="write-article__btn" href="/article/new">Write article</a>
+					<img class="write-article__plus__symbol" src="/res/plus-symbol.svg" alt="plus-symbol" />
+				</div>
+				<% } %>
+			</div>
+			<div class="articles__container">
+				<select name="articles-filter" id="articles-filter" onchange="location = this.value">
+					<option value="?selected=all" <%=categorySelected === 'all' ? 'selected' : ''%>>All articles</option>
+					<option value="?selected=writen" <%=categorySelected === 'writen' ? 'selected' : ''%>>Your articles</option>
+					<option value="?selected=favourites" <%=categorySelected === 'favourites' ? 'selected' : ''%>>Favourites</option>
+				</select>
+				<div class="articles__wrapper">
+					<% if (articles && articles.length > 0) { %>
+						<% articles.forEach(article => { %>
+							<div class="article__card">
+								<a href="/article/<%=article._id%>"><img src="<%=`${imgUrl}${article.imageName}`%>" alt="<%=article.imageName%>"></a>
+								<form>
+									<% if (user.role !== 'Newsplane. User') { %>
+										<div class="edit__btn__wrapper">
+											<img src="/res/edit-icon.svg" alt="edit-icon" class="edit__btn__icon">
+											<button class="article__edit__btn" type="submit" formaction="/article/edit/<%=article._id%>" formmethod="GET">Edit</button>
+										</div>
+									<% } else { %>
+										<a href="/article/<%=article._id%>"><div class="blank__edit__space"></div></a>
+									<% } %>
+									<div class="delete__btn__wrapper">
+										<img src="/res/delete-icon.svg" alt="delete-icon" class="delete__btn__icon">
+										<button class="article__delete__btn" type="submit" formaction="/article/<%=article._id%>/?_method=DELETE" formmethod="POST">Delete</button>
+									</div>
+									<input type="text" name="categorySelected" value="<%=categorySelected%>" hidden>
+								</form>
+								<div class="article__title__wrapper">
+									<p class="article__title"><%=article.articleTitle%></p>
+								</div>
+							</div>
+						<% }) %>
+					<% } else { %>
+						<p class="no__articles__message">No articles found</p>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<%-include('./templates/t_footer.html')%>
+		<script>
+			const fireDelete = document.querySelector('.delete__btn__wrapper');
+			fireDelete.addEventListener('click', () => {
+				document.querySelector('.article__delete__btn').click();
+			});
+
+			const fireEdit = document.querySelector('.edit__btn__wrapper');
+			fireEdit.addEventListener('click', () => {
+				document.querySelector('.article__edit__btn').click();
+			});
+		</script>
+	</body>
+</html>
