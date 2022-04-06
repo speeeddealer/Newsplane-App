@@ -68,6 +68,10 @@ router.put('/', verify, upload.single("file"), async (req, res) => {
             return res.render('your-account', {user: user, isVerified: req.isVerified, error: error, imgUrl: imgUrl});
         }
 
+        // Check if image got uploaded
+        let newProfilePic = user.profilePic;
+        if (req.file) newProfilePic = req.file.filename;
+
         // Create new data object
         newUserData = {
             firstName: req.body.firstName || user.firstName,
@@ -76,7 +80,7 @@ router.put('/', verify, upload.single("file"), async (req, res) => {
             email: req.body.email ? req.body.email.toLowerCase() : user.email,
             password: req.body.password ? await hashPassword(req.body.password) : user.password,
             role: user.role,
-            profilePic: req.file.filename || user.profilePic
+            profilePic: newProfilePic
         };
 
         // Update user with new data
