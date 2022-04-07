@@ -1,7 +1,8 @@
 # Newsplane-App
 
+The project of this site was made using Figma: https://www.figma.com/file/yxX0EXHKP6G4rY451IcBr7/Articles-Site-Project?node-id=0%3A1 <br>
+
 You can find an easy to access page of this project under this link: https://newsplane.herokuapp.com/. <br>
-The project of this site was made using Figma: https://www.figma.com/file/yxX0EXHKP6G4rY451IcBr7/Articles-Site-Project?node-id=0%3A1
 
 You can play around with it and to do so you can log in with this user:
 
